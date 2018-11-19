@@ -25,7 +25,8 @@
     "lint:fix": "eslint --fix .",
     "ts:check": "tsc --checkJs --allowJS --noEmit \"./**/*.js\"",
     "test": "jest .",
-    "format": "prettier --write \"./**/*.{js,json,css,md}\""
+    "format": "prettier --write \"./**/*.{js,json,css,md}\"",
+    "prepublishOnly": "run-s lint ts:check test build"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
