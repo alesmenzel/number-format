@@ -1,0 +1,67 @@
+{
+  "name": "number-format",
+  "version": "1.0.0-alpha.1",
+  "description": "Number formatting utility",
+  "keywords": [
+    "number",
+    "formatting",
+    "utility"
+  ],
+  "contributors": [
+    "Ales Menzel <alesmenzel@gmail.com> (https://github.com/alesmenzel)"
+  ],
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "scripts": {
+    "build": "run-s clean build:lib build:es build:umd build:umd:min",
+    "build:lib": "babel src --out-dir ./lib --ignore \"**/*.spec.js\"",
+    "build:es": "cross-env BABEL_ENV=es babel ./src --out-dir ./es --ignore \"**/*.spec.js\"",
+    "build:umd": "cross-env NODE_ENV=development webpack --output dist/react-forms.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack --output dist/react-forms.min.js",
+    "build:es:dev:watch": "npm run build:es -- --source-maps --watch",
+    "clean": "rimraf ./dist ./lib ./es",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "ts:check": "tsc --checkJs --allowJS --noEmit \"./**/*.js\"",
+    "test": "jest .",
+    "format": "prettier --write \"./**/*.{js,json,css,md}\""
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.0",
+    "husky": "^1.1.4",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.0.5",
+    "npm-run-all": "^4.1.3",
+    "prettier": "^1.15.2",
+    "regenerator-runtime": "^0.13.1",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "run-s lint ts:check test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
