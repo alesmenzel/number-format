@@ -1,5 +1,5 @@
 {
-  "name": "number-format",
+  "name": "@alesmenzel/number-format",
   "version": "1.0.0-alpha.1",
   "description": "Number formatting utility",
   "keywords": [
