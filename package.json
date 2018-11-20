@@ -27,10 +27,9 @@
     "clean": "rimraf ./dist ./lib",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "ts:check": "tsc --checkJs --allowJS --noEmit \"./**/*.js\"",
     "test": "jest .",
     "format": "prettier --write \"./**/*.{js,json,css,md}\"",
-    "prepublishOnly": "run-s lint ts:check test build",
+    "prepublishOnly": "run-s lint test build",
     "publish:latest": "npm publish --access public --tag latest",
     "publish:next": "npm publish --access public --tag next"
   },
@@ -62,7 +61,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "run-s lint ts:check test"
+      "pre-push": "run-s lint test"
     }
   },
   "lint-staged": {
