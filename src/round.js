@@ -5,9 +5,9 @@ import exponent from './exponent';
  *
  * @example Sample inputs:
  * ```js
- * round(12345.123, 1000); // 12000
- * round(12345.123, 1); // 12345
- * round(12345.123, 0.01); // 12345.12
+ * round(1000)(12345.123); // 12000
+ * round(1)(12345.123); // 12345
+ * round(0.01)(12345.123); // 12345.12
  * ```
  *
  * @param {Number} precision Precision in multiplication of 10 (e.g. 1000, 1, 0.1, 0.001)

@@ -12,7 +12,7 @@ import changeThousandsSeparator from './change-thousands-separator';
  * @param {String} thousandSep Thousands separator
  * @param {String} decimalSep Decimal separator
  */
-const changeSeparators = (thousandSep = ',', decimalSep = '.') => number => {
+const changeSeparators = (thousandSep = '', decimalSep = '.') => number => {
   const [int, dec] = `${number}`.split('.');
 
   const sep = changeThousandsSeparator(thousandSep)(int);
