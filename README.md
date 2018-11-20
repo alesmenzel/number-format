@@ -8,7 +8,7 @@ Utility for formatting numbers for Node and Browser that handles floating point 
 npm install --save @alesmenzel/number-format
 ```
 
-# Table of Contents
+## Table of Contents
 
 1. [Usage](#usage)
    1. [Round](#round)
