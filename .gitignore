@@ -77,5 +77,4 @@ typings/
 
 # Build output
 dist/
-es/
 lib/
