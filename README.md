@@ -1,4 +1,4 @@
-# Number Format 🍀 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/alesmenzel/number-format/blob/master/LICENCE)
+# Number Format 🍀 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/alesmenzel/number-format/blob/master/LICENCE) [![npm version](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format.svg)](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format) [![Build Status](https://travis-ci.com/alesmenzel/number-format.svg?branch=master)](https://travis-ci.com/alesmenzel/number-format)
 
 Utility for formatting numbers for Node and Browser that handles floating point number imprecission.
 
