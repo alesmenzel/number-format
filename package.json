@@ -10,22 +10,29 @@
   "contributors": [
     "Ales Menzel <alesmenzel@gmail.com> (https://github.com/alesmenzel)"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alesmenzel/number-format.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alesmenzel/number-format/issues"
+  },
   "license": "MIT",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "scripts": {
-    "build": "run-s clean build:lib build:umd build:umd:min",
-    "build:lib": "babel src --out-dir ./lib --ignore \"**/*.spec.js\"",
-    "build:umd": "cross-env NODE_ENV=development webpack --output dist/number-format.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack --output dist/number-format.min.js",
-    "build:es:dev:watch": "npm run build:es -- --source-maps --watch",
+    "build": "run-s clean build:*",
+    "build:lib": "babel src --out-dir ./lib --ignore \"./**/*.spec.js\"",
+    "build:umd": "cross-env NODE_ENV=production webpack --output dist/number-format.min.js",
     "clean": "rimraf ./dist ./lib",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "ts:check": "tsc --checkJs --allowJS --noEmit \"./**/*.js\"",
     "test": "jest .",
     "format": "prettier --write \"./**/*.{js,json,css,md}\"",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "run-s lint ts:check test build",
+    "publish:latest": "npm publish --access public --tag latest",
+    "publish:next": "npm publish --access public --tag next"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
