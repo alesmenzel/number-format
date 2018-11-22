@@ -7,9 +7,7 @@
  * percentage(0); // 0
  * percentage(-1.23); // -123
  * ```
- *
- * @param {Number} number
  */
-const percentage = number => +`${number}e+2`;
+const percentage = () => number => +`${number}e+2`;
 
 export default percentage;

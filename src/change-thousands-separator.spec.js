@@ -1,6 +1,12 @@
 import changeThousandsSeparator from './change-thousands-separator';
 
 describe('changeThousandsSeparator', () => {
+  test('add the default thousand separator to large number', () => {
+    const input = 152000000;
+    const format = changeThousandsSeparator();
+    expect(format(input)).toBe('152000000');
+  });
+
   test('add the thousand separator to large number', () => {
     const input = 152000000;
     const format = changeThousandsSeparator(' ');

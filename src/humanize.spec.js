@@ -1,10 +1,10 @@
-import humanize from './humanize';
+import humanize, { GENERAL_SUFFIXES } from './humanize';
 
 describe('humanize', () => {
-  test('convert to human readable format a unsupported big number', () => {
-    const input = 1465849859165153;
+  test('convert to human readable format an unsupported big number', () => {
+    const input = 146584985916515315498494894849;
     const format = humanize();
-    expect(format(input)).toBe(1465849859165153);
+    expect(format(input)).toBe(146584985916515315498494894849);
   });
 
   test('convert to human readable format a trilion', () => {
@@ -28,7 +28,7 @@ describe('humanize', () => {
   test('convert to human readable format a thousand', () => {
     const input = 1465;
     const format = humanize();
-    expect(format(input)).toBe('1.465K');
+    expect(format(input)).toBe('1.465k');
   });
 
   test('convert to human readable format a zero', () => {
@@ -40,7 +40,7 @@ describe('humanize', () => {
   test('convert to human readable format a negative thousand', () => {
     const input = -1465;
     const format = humanize();
-    expect(format(input)).toBe('-1.465K');
+    expect(format(input)).toBe('-1.465k');
   });
 
   test('convert to human readable format a negative milion', () => {
@@ -52,14 +52,87 @@ describe('humanize', () => {
   test('formats positive number before coverting to human readable format', () => {
     const input = 1465;
     const transform = num => num.toFixed(5);
-    const format = humanize(transform);
-    expect(format(input)).toBe('1.46500K');
+    // @ts-ignore
+    const format = humanize({ transform });
+    expect(format(input)).toBe('1.46500k');
   });
 
   test('formats negative number before coverting to human readable format', () => {
     const input = -1465;
     const transform = num => num.toFixed(5);
-    const format = humanize(transform);
-    expect(format(input)).toBe('-1.46500K');
+    // @ts-ignore
+    const format = humanize({ transform });
+    expect(format(input)).toBe('-1.46500k');
+  });
+
+  test('disabled big numbers', () => {
+    const input = 156949847;
+    const options = {
+      transform: number => number.toFixed(2),
+      base: 1024,
+      suffixes: {
+        big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        small: [],
+      },
+      big: false,
+      small: true,
+    };
+    const format = humanize(options);
+    expect(format(input)).toBe(156949847);
+  });
+
+  test('disabled small numbers', () => {
+    const input = 156949847;
+    const options = {
+      transform: number => number.toFixed(2),
+      base: 1024,
+      suffixes: GENERAL_SUFFIXES,
+      big: true,
+      small: false,
+    };
+    const format = humanize(options);
+    expect(format(input)).toBe('149.68M');
+  });
+
+  test('small numbers for a small number', () => {
+    const input = 0.0000000156949847;
+    const options = {
+      transform: number => number.toFixed(2),
+      base: 1000,
+      suffixes: GENERAL_SUFFIXES,
+      big: true,
+      small: true,
+    };
+    const format = humanize(options);
+    expect(format(input)).toBe('15.69µ');
+  });
+
+  test('disabled small numbers for a small number', () => {
+    const input = 0.0000000156949847;
+    const options = {
+      transform: number => number.toFixed(2),
+      base: 1000,
+      suffixes: GENERAL_SUFFIXES,
+      big: true,
+      small: false,
+    };
+    const format = humanize(options);
+    expect(format(input)).toBe(0.0000000156949847);
+  });
+
+  test('all in one', () => {
+    const input = 156949847;
+    const options = {
+      transform: number => number.toFixed(2),
+      base: 1024,
+      suffixes: {
+        big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        small: [],
+      },
+      big: true,
+      small: true,
+    };
+    const format = humanize(options);
+    expect(format(input)).toBe('149.68MB');
   });
 });
