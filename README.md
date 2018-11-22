@@ -29,9 +29,9 @@ Round number to given precision. Handles rounding of integers as well as decimal
 
 Parameters:
 
-| Name        | Type     | Description                | Default |
-| ----------- | -------- | -------------------------- | ------- |
-| `precision` | `Number` | The precision to round to. | -       |
+| Name        | Type     | Description                                                                   | Default |
+| ----------- | -------- | ----------------------------------------------------------------------------- | ------- |
+| `precision` | `Number` | The precision to round to. Should be a multiple of 10 (e.g. '1000' or '0.01') | -       |
 
 ```js
 import { round } from '@alesmenzel/number-format';
@@ -52,9 +52,122 @@ Converts number to a human readable format. Handles numbers up to trilions.
 
 Parameters:
 
-| Name        | Type                         | Description                                                                                 | Default |
-| ----------- | ---------------------------- | ------------------------------------------------------------------------------------------- | ------- |
-| `transform` | `Function(String => String)` | Function to transform the number before appending the sufix (e.g. to be used for rounding). | -       |
+| Name                     | Type                                | Description                                                                                 | Default                       |
+| ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------- |
+| `options`                | `Object`                            | Options                                                                                     | See defaulto options below    |
+| `options.transform`      | `Function(Number => Number|String)` | Function to transform the number before appending the sufix (e.g. to be used for rounding). | `indentity(Number => Number)` |
+| `options.base`           | `Number`                            | Base for the numbers.                                                                       | `1000`                        |
+| `options.suffixes`       | `Object`                            | Suffixes to use after the number.                                                           | `GENERAL_SUFFIXES`            |
+| `options.suffixes.big`   | `Array`                             | Enable adding suffixes for big numbers (`x >= 0`). E.g. `12MB`                              | `true`                        |
+| `options.suffixes.small` | `Array`                             | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `false`                       |
+
+#### Default options:
+
+```js
+{
+    transform = identity,
+    suffixes = GENERAL_SUFFIXES,
+    base = 1000,
+    big = true,
+    small = true,
+}
+```
+
+#### Available suffixes:
+
+```js
+// Numbers: https://en.wikipedia.org/wiki/Order_of_magnitude
+const GENERAL_SUFFIXES = {
+  big: ['', 'k', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'],
+  small: ['', 'm', 'µ', 'n', 'p'],
+};
+const GENERAL_NAME_SUFFIXES = {
+  big: [
+    '',
+    'thousand',
+    'million',
+    'billion',
+    'trillion',
+    'quadrillion',
+    'quintillion',
+    'sextillion',
+    'septillion',
+  ],
+  small: ['', 'thousandth', 'millionth', 'billionth', 'trillionth'],
+};
+
+// Bytes: https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
+const SI_SUFFIXES = {
+  big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+  small: [],
+};
+const SI_NAME_SUFFIXES = {
+  big: [
+    'byte',
+    'kilobyte',
+    'megabyte',
+    'gigabyte',
+    'terabyte',
+    'petabyte',
+    'exabyte',
+    'zettabyte',
+    'yottabyte',
+  ],
+  small: [],
+};
+
+// Bytes: https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
+const IT_SUFFIXES = {
+  big: ['', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+  small: [],
+};
+const IT_NAME_SUFFIXES = {
+  big: [
+    'byte',
+    'kibibyte',
+    'mebibyte',
+    'gibibyte',
+    'tebibyte',
+    'pebibyte',
+    'exbibyte',
+    'zebibyte',
+    'yobibyte',
+  ],
+  small: [],
+};
+
+// Time: https://en.wikipedia.org/wiki/Orders_of_magnitude_(time)
+const TIME_SUFFIXES = {
+  big: ['', 'ks', 'Ms', 'Gs', 'Ts', 'Ps', 'Es', 'Zs', 'Ys'],
+  small: ['', 'ms', 'µs', 'ns', 'ps', 'fs', 'as', 'zs', 'ys'],
+};
+const TIME_NAME_SUFFIXES = {
+  big: [
+    '',
+    'kilosecond',
+    'megasecond',
+    'gigasecond',
+    'terasecond',
+    'petasecond',
+    'exasecond',
+    'zettasecond',
+    'yottasecond',
+  ],
+  small: [
+    '',
+    'millisecond',
+    'microsecond',
+    'nanosecond',
+    'picosecond',
+    'femtosecond',
+    'attosecond',
+    'zeptosecond',
+    'yoctosecond',
+  ],
+};
+```
+
+#### Sample usage
 
 ```js
 import { humanize, round } from '@alesmenzel/number-format';
@@ -66,9 +179,25 @@ format(123456789); // 123.456789M
 format(-123456789); // -123.456789M
 format(100); // 100
 
-const formatAndRound = humanize(round(0.01));
+const formatAndRound = humanize({
+  transform: round(0.01)
+});
 
 formatAndRound(123456789); // 123.45M
+
+const formatBytes = humanize({
+  transform: round(0.01),
+  base: 1024
+  suffixes: {
+    // Custom suffixes or you can use any of the predeffined (or combine them)
+    big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    small: []
+  },
+  big: true,
+  small: false
+});
+
+formatBytes(156949847); // 149.68MB
 ```
 
 ### Compose
@@ -135,20 +264,23 @@ Any formatter should be of type `Number|String => Number|String`.
 import { compose, round, changeSeparators } from '@alesmenzel/number-format';
 
 // Here we define our custom formatter that returns specified number of last digits
-const lastDigits = (options) => {
+const lastDigits = options => {
   const { length } = options;
 
-  return (number) => {
+  return number => {
     return `${number}`.slice(-options.length);
   };
-}
+};
 
 const format = lastDigits({ length: 3 });
 
 format(123456789); // 789
 
 // Use it in composition
-const format = compose(round(10), lastDigits({ length: 3 }));
+const format = compose(
+  round(10),
+  lastDigits({ length: 3 })
+);
 
 format(123456789); // 790
 ```
