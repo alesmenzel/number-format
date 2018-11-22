@@ -1,4 +1,4 @@
-import humanize, { GENERAL_SUFFIXES } from './humanize';
+import humanize, { GENERAL_SUFFIXES, TIME_SUFFIXES } from './humanize';
 
 describe('humanize', () => {
   test('convert to human readable format an unsupported big number', () => {
@@ -94,6 +94,19 @@ describe('humanize', () => {
     expect(format(input)).toBe('149.68M');
   });
 
+  test('handle suffix for a small number when enabled', () => {
+    const input = 0.001;
+    const options = {
+      base: 1000,
+      suffixes: TIME_SUFFIXES,
+      big: true,
+      small: true,
+    };
+    // @ts-ignore
+    const format = humanize(options);
+    expect(format(input)).toBe('1ms');
+  });
+
   test('small numbers for a small number', () => {
     const input = 0.0000000156949847;
     const options = {
@@ -104,7 +117,7 @@ describe('humanize', () => {
       small: true,
     };
     const format = humanize(options);
-    expect(format(input)).toBe('15.69µ');
+    expect(format(input)).toBe('15.69n');
   });
 
   test('disabled small numbers for a small number', () => {

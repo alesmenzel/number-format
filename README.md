@@ -61,7 +61,7 @@ Parameters:
 | `options.suffixes.big`   | `Array`                             | Enable adding suffixes for big numbers (`x >= 0`). E.g. `12MB`                              | `true`                        |
 | `options.suffixes.small` | `Array`                             | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `false`                       |
 
-#### Default options:
+#### Default options
 
 ```js
 {
@@ -73,97 +73,47 @@ Parameters:
 }
 ```
 
-#### Available suffixes:
+#### Available suffixes
 
 ```js
 // Numbers: https://en.wikipedia.org/wiki/Order_of_magnitude
 const GENERAL_SUFFIXES = {
-  big: ['', 'k', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'],
-  small: ['', 'm', 'µ', 'n', 'p'],
+  big: ['', 'k', 'M', 'B', 'T' /* ... */],
+  small: ['m', 'µ', 'n' /* ... */],
 };
 const GENERAL_NAME_SUFFIXES = {
-  big: [
-    '',
-    'thousand',
-    'million',
-    'billion',
-    'trillion',
-    'quadrillion',
-    'quintillion',
-    'sextillion',
-    'septillion',
-  ],
-  small: ['', 'thousandth', 'millionth', 'billionth', 'trillionth'],
+  big: ['', 'thousand', 'million', 'billion' /* ... */],
+  small: ['thousandth', 'millionth', 'billionth' /* ... */],
 };
 
 // Bytes: https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
 const SI_SUFFIXES = {
-  big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+  big: ['', 'KB', 'MB', 'GB', 'TB' /* ... */],
   small: [],
 };
 const SI_NAME_SUFFIXES = {
-  big: [
-    'byte',
-    'kilobyte',
-    'megabyte',
-    'gigabyte',
-    'terabyte',
-    'petabyte',
-    'exabyte',
-    'zettabyte',
-    'yottabyte',
-  ],
+  big: ['byte', 'kilobyte', 'megabyte', 'gigabyte' /* ... */],
   small: [],
 };
 
 // Bytes: https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
 const IT_SUFFIXES = {
-  big: ['', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+  big: ['', 'Kb', 'Mb', 'Gb' /* ... */],
   small: [],
 };
 const IT_NAME_SUFFIXES = {
-  big: [
-    'byte',
-    'kibibyte',
-    'mebibyte',
-    'gibibyte',
-    'tebibyte',
-    'pebibyte',
-    'exbibyte',
-    'zebibyte',
-    'yobibyte',
-  ],
+  big: ['byte', 'kibibyte', 'mebibyte', 'gibibyte' /* ... */],
   small: [],
 };
 
 // Time: https://en.wikipedia.org/wiki/Orders_of_magnitude_(time)
 const TIME_SUFFIXES = {
-  big: ['', 'ks', 'Ms', 'Gs', 'Ts', 'Ps', 'Es', 'Zs', 'Ys'],
-  small: ['', 'ms', 'µs', 'ns', 'ps', 'fs', 'as', 'zs', 'ys'],
+  big: ['', 'ks', 'Ms', 'Gs' /* ... */],
+  small: ['ms', 'µs', 'ns' /* ... */],
 };
 const TIME_NAME_SUFFIXES = {
-  big: [
-    '',
-    'kilosecond',
-    'megasecond',
-    'gigasecond',
-    'terasecond',
-    'petasecond',
-    'exasecond',
-    'zettasecond',
-    'yottasecond',
-  ],
-  small: [
-    '',
-    'millisecond',
-    'microsecond',
-    'nanosecond',
-    'picosecond',
-    'femtosecond',
-    'attosecond',
-    'zeptosecond',
-    'yoctosecond',
-  ],
+  big: ['', 'kilosecond', 'megasecond', 'gigasecond' /* ... */],
+  small: ['millisecond', 'microsecond', 'nanosecond' /* ... */],
 };
 ```
 

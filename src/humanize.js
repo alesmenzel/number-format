@@ -1,9 +1,25 @@
 import identity from './identity';
+import exponent from './exponent';
 
 export const GENERAL_SUFFIXES = {
   big: ['', 'k', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'],
-  small: ['', 'm', 'µ', 'n', 'p'],
+  small: ['m', 'µ', 'n', 'p'],
 };
+export const GENERAL_NAME_SUFFIXES = {
+  big: [
+    '',
+    'thousand',
+    'million',
+    'billion',
+    'trillion',
+    'quadrillion',
+    'quintillion',
+    'sextillion',
+    'septillion',
+  ],
+  small: ['thousandth', 'millionth', 'billionth', 'trillionth'],
+};
+
 // https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
 export const SI_SUFFIXES = {
   big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
@@ -45,7 +61,7 @@ export const IT_NAME_SUFFIXES = {
 // https://en.wikipedia.org/wiki/Orders_of_magnitude_(time)
 export const TIME_SUFFIXES = {
   big: ['', 'ks', 'Ms', 'Gs', 'Ts', 'Ps', 'Es', 'Zs', 'Ys'],
-  small: ['', 'ms', 'µs', 'ns', 'ps', 'fs', 'as', 'zs', 'ys'],
+  small: ['ms', 'µs', 'ns', 'ps', 'fs', 'as', 'zs', 'ys'],
 };
 export const TIME_NAME_SUFFIXES = {
   big: [
@@ -60,7 +76,6 @@ export const TIME_NAME_SUFFIXES = {
     'yottasecond',
   ],
   small: [
-    '',
     'millisecond',
     'microsecond',
     'nanosecond',
@@ -110,7 +125,7 @@ const defaultOptions = {
  * @param {Boolean} options.big [optional] Use suffixes for big numbers if available (defautls to true)
  * @param {Boolean} options.small [optional] Use suffixes for small numbers if available (defautls to false)
  */
-const humanize = (options = defaultOptions) => number => {
+const humanize = (options = defaultOptions) => {
   const {
     transform = identity,
     suffixes = GENERAL_SUFFIXES,
@@ -118,30 +133,33 @@ const humanize = (options = defaultOptions) => number => {
     big = true,
     small = true,
   } = options;
-  const numberAbs = Math.abs(number);
 
-  const exp = Math.floor(Math.log(numberAbs) / Math.log(base));
+  const baseExponent = exponent(base);
 
-  if (exp > 0 && !big) {
-    return number;
-  }
+  return number => {
+    const exp = baseExponent(number);
 
-  if (exp < 0 && !small) {
-    return number;
-  }
+    if (exp > 0 && !big) {
+      return number;
+    }
 
-  const side = exp >= 0 ? 'big' : 'small';
-  const index = exp >= 0 ? exp : Math.abs(exp + 1);
-  const suffix = suffixes[side][index];
+    if (exp < 0 && !small) {
+      return number;
+    }
 
-  if (!suffix) {
-    return number;
-  }
+    const side = exp >= 0 ? 'big' : 'small';
+    const index = exp >= 0 ? exp : Math.abs(exp + 1);
+    const suffix = suffixes[side][index];
 
-  const res = number / base ** exp;
-  const formatted = transform(res);
+    if (!suffix) {
+      return number;
+    }
 
-  return `${formatted}${suffix}`;
+    const res = number / base ** exp;
+    const formatted = transform(res);
+
+    return `${formatted}${suffix}`;
+  };
 };
 
 export default humanize;
