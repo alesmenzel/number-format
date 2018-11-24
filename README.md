@@ -42,8 +42,8 @@ format(12345.123); // 12000
 const format = round(1);
 format(12345.123); // 12345
 
-const format = round(0.001);
-format(12345.123); // 12345.12
+const format = round(0.01);
+format(12345.12345); // 12345.12
 ```
 
 ### Humanize
@@ -124,7 +124,7 @@ import { humanize, round } from '@alesmenzel/number-format';
 
 const format = humanize();
 
-format(123000); // 123K
+format(123000); // 123k
 format(123456789); // 123.456789M
 format(-123456789); // -123.456789M
 format(100); // 100

@@ -101,7 +101,7 @@ const defaultOptions = {
  *
  * @example Sample input:
  * ```js
- * humanize()(123000); // 123K
+ * humanize()(123000); // 123k
  * humanize()(123456789); // 123.456789M
  * humanize()(-123456789); // -123.456789M
  * humanize()(100); // 100
