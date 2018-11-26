@@ -18,7 +18,7 @@
     "url": "https://github.com/alesmenzel/number-format/issues"
   },
   "license": "MIT",
-  "main": "./lib/index.js",
+  "main": "./number-format.js",
   "module": "./es/index.js",
   "scripts": {
     "build": "run-s clean build:*",
@@ -69,5 +69,12 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "files": [
+    "src",
+    "number-format.js",
+    "dist/number-format.min.js",
+    "LICENSE",
+    "README.md"
+  ]
 }

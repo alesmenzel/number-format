@@ -5,7 +5,7 @@ const config = {
   mode: isProduction ? 'production' : 'development',
   entry: ['./number-format.js'],
   output: {
-    library: 'NumberFormat',
+    library: 'numberFormat',
     libraryTarget: 'umd',
   },
   module: {
