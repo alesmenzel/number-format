@@ -1,10 +1,11 @@
-const { env } = process;
-const isProduction = env.NODE_ENV === 'production';
+const path = require('path');
 
 const config = {
-  mode: isProduction ? 'production' : 'development',
-  entry: ['./number-format.js'],
+  mode: 'production',
+  entry: './number-format.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'number-format.js',
     library: 'numberFormat',
     libraryTarget: 'umd',
   },
@@ -13,11 +14,10 @@ const config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        use: 'babel-loader',
       },
     ],
   },
-  devtool: isProduction ? false : 'source-map',
 };
 
 module.exports = config;

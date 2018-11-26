@@ -18,13 +18,12 @@
     "url": "https://github.com/alesmenzel/number-format/issues"
   },
   "license": "MIT",
-  "main": "./number-format.js",
-  "module": "./es/index.js",
+  "main": "./dist/number-format.js",
+  "module": "./number-format.js",
   "scripts": {
     "build": "run-s clean build:*",
-    "build:lib": "babel src --out-dir ./lib --ignore \"./**/*.spec.js\"",
-    "build:umd": "cross-env NODE_ENV=production webpack --output dist/number-format.min.js",
-    "clean": "rimraf ./dist ./lib",
+    "build:umd": "webpack",
+    "clean": "rimraf ./dist",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest --coverage .",
@@ -73,7 +72,7 @@
   "files": [
     "src",
     "number-format.js",
-    "dist/number-format.min.js",
+    "dist",
     "LICENSE",
     "README.md"
   ]
