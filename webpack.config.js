@@ -8,6 +8,7 @@ const config = {
     filename: 'number-format.js',
     library: 'numberFormat',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   module: {
     rules: [
