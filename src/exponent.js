@@ -1,3 +1,5 @@
+import log from './log';
+
 /**
  * Return exponent of a number
  *
@@ -11,7 +13,12 @@
  * ```
  * @param {Number} base The base (defaults to 10)
  */
-const exponent = (base = 10) => number =>
-  number ? Math.floor(Math.log(Math.abs(number)) / Math.log(base)) : 0;
+const exponent = (base = 10) => number => {
+  if (!number) {
+    return 0;
+  }
+
+  return Math.floor(log(base, Math.abs(number)));
+};
 
 export default exponent;

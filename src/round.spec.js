@@ -42,4 +42,11 @@ describe('round', () => {
     const format = round(precision);
     expect(format(input)).toBe(1465);
   });
+
+  test('round a small number to larger precision', () => {
+    const input = 162.1565849;
+    const precision = 1000;
+    const format = round(precision);
+    expect(format(input)).toBe(0);
+  });
 });
