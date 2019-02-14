@@ -155,6 +155,16 @@ formatBytes(156949847); // 149.68MB
 
 ### Percentage
 
+Simply times the value by 100.
+
+```js
+import { percentage } from '@alesmenzel/number-format';
+
+percentage(0.12); // 12
+percentage(0); // 0
+percentage(-1.23); // -123
+```
+
 ### Plus
 
 Simply adds a plus for positive numbers.
