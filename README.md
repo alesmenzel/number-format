@@ -1,4 +1,4 @@
-# Number Format 🍀 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/alesmenzel/number-format/blob/master/LICENCE) [![npm version](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format.svg)](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format) [![Build Status](https://travis-ci.com/alesmenzel/number-format.svg?branch=master)](https://travis-ci.com/alesmenzel/number-format)
+# Number Format 🍀 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/alesmenzel/number-format/blob/master/LICENSE) [![npm version](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format.svg)](https://badge.fury.io/js/%40alesmenzel%2Fnumber-format) [![Build Status](https://travis-ci.com/alesmenzel/number-format.svg?branch=master)](https://travis-ci.com/alesmenzel/number-format)
 
 Utility for formatting numbers for Node and Browser that handles floating point number imprecission.
 
@@ -17,7 +17,7 @@ npm install --save @alesmenzel/number-format
    4. [Separators](#separators)
    5. [Custom formatter](#custom-formatter)
 2. [Request a feature](#request-a-feature)
-3. [Licence](#licence)
+3. [License](#license)
 
 ## Usage
 
@@ -241,4 +241,4 @@ If you are missing a feature, please [open a new issue](https://github.com/alesm
 
 ## License
 
-This project is licensed under the terms of the [MIT license](./LICENCE).
+This project is licensed under the terms of the [MIT license](./LICENSE).
