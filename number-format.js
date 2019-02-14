@@ -1,10 +1,36 @@
-export { default as changeSeparators } from './src/change-separators';
-export { default as changeThousandsSeparator } from './src/change-thousands-separator';
-export { default as compose } from './src/compose';
+import changeSeparators from './src/change-separators';
+import changeThousandsSeparator from './src/change-thousands-separator';
+import compose from './src/compose';
+import humanize, * as humanizeOptions from './src/humanize';
+import percentage from './src/percentage';
+import plus from './src/plus';
+import prefix from './src/prefix';
+import round from './src/round';
+import suffix from './src/suffix';
+
+export {
+  changeSeparators,
+  changeThousandsSeparator,
+  compose,
+  humanize,
+  percentage,
+  plus,
+  prefix,
+  round,
+  suffix,
+};
+
 export * from './src/humanize';
-export { default as humanize } from './src/humanize';
-export { default as percentage } from './src/percentage';
-export { default as plus } from './src/plus';
-export { default as prefix } from './src/prefix';
-export { default as round } from './src/round';
-export { default as suffix } from './src/suffix';
+
+export default {
+  changeSeparators,
+  changeThousandsSeparator,
+  compose,
+  humanize,
+  percentage,
+  plus,
+  prefix,
+  round,
+  suffix,
+  ...humanizeOptions,
+};
