@@ -78,7 +78,7 @@ describe('humanize', () => {
       small: true,
     };
     const format = humanize(options);
-    expect(format(input)).toBe(156949847);
+    expect(format(input)).toBe('156949847.00');
   });
 
   test('disabled small numbers', () => {
@@ -130,7 +130,7 @@ describe('humanize', () => {
       small: false,
     };
     const format = humanize(options);
-    expect(format(input)).toBe(0.0000000156949847);
+    expect(format(input)).toBe('0.00');
   });
 
   test('all in one', () => {
