@@ -13,9 +13,12 @@ npm install --save @alesmenzel/number-format
 1. [Usage](#usage)
    1. [Round](#round)
    2. [Humanize](#humanize)
-   3. [Compose](#compose)
-   4. [Separators](#separators)
-   5. [Custom formatter](#custom-formatter)
+   3. [Plus](#plus)
+   4. [Percentage](#percentage)
+   5. [Prefix](#prefix)
+   6. [Suffix](#suffix)
+   7. [Separators](#separators)
+   8. [Custom formatter](#custom-formatter)
 2. [Request a feature](#request-a-feature)
 3. [License](#license)
 
@@ -148,6 +151,56 @@ const formatBytes = humanize({
 });
 
 formatBytes(156949847); // 149.68MB
+```
+
+### Percentage
+
+### Plus
+
+Simply adds a plus for positive numbers.
+
+```js
+import { plus } from '@alesmenzel/number-format';
+
+plus(123456); // +123456
+plus(0); // 0
+plus(-123456); // -123456
+```
+
+### Prefix
+
+Simply adds a prefix.
+
+Parameters:
+
+| Name     | Type     | Description                                                             | Default |
+| -------- | -------- | ----------------------------------------------------------------------- | ------- |
+| `prefix` | `String` | Prepends a given prefix and returns a string. `Number|String => String` | -       |
+
+```js
+import { prefix } from '@alesmenzel/number-format';
+
+prefix('$')(123456); // $123456
+prefix('$')(0); // $0
+prefix('$')(-123456); // $-123456
+```
+
+### Suffix
+
+Simply adds a suffix.
+
+Parameters:
+
+| Name     | Type     | Description                                                            | Default |
+| -------- | -------- | ---------------------------------------------------------------------- | ------- |
+| `suffix` | `String` | Appends a given suffix and returns a string. `Number|String => String` | -       |
+
+```js
+import { suffix } from '@alesmenzel/number-format';
+
+suffix('€')(123456); // 123456€
+suffix('€')(0); // 0€
+suffix('€')(-123456); // -123456€
 ```
 
 ### Compose
