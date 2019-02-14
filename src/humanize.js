@@ -140,11 +140,11 @@ const humanize = (options = defaultOptions) => {
     const exp = baseExponent(number);
 
     if (exp > 0 && !big) {
-      return number;
+      return transform(number);
     }
 
     if (exp < 0 && !small) {
-      return number;
+      return transform(number);
     }
 
     const side = exp >= 0 ? 'big' : 'small';
@@ -152,7 +152,7 @@ const humanize = (options = defaultOptions) => {
     const suffix = suffixes[side][index];
 
     if (!suffix) {
-      return number;
+      return transform(number);
     }
 
     const res = number / base ** exp;
