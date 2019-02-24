@@ -102,14 +102,14 @@ Converts number to a human readable format. Handles numbers up to trilions.
 
 Parameters:
 
-| Name                     | Type                                | Description                                                                                 | Default                       |
-| ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------- |
-| `options`                | `Object`                            | Options                                                                                     | See defaulto options below    |
-| `options.transform`      | `Function(Number => Number|String)` | Function to transform the number before appending the sufix (e.g. to be used for rounding). | `indentity(Number => Number)` |
-| `options.base`           | `Number`                            | Base for the numbers.                                                                       | `1000`                        |
-| `options.suffixes`       | `Object`                            | Suffixes to use after the number.                                                           | `GENERAL_SUFFIXES`            |
-| `options.suffixes.big`   | `Array`                             | Enable adding suffixes for big numbers (`x >= 0`). E.g. `12MB`                              | `true`                        |
-| `options.suffixes.small` | `Array`                             | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `true`                        |
+| Name                     | Type                                 | Description                                                                                 | Default                       |
+| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------- | ----------------------------- |
+| `options`                | `Object`                             | Options                                                                                     | See defaulto options below    |
+| `options.transform`      | `Function(Number => Number\|String)` | Function to transform the number before appending the sufix (e.g. to be used for rounding). | `indentity(Number => Number)` |
+| `options.base`           | `Number`                             | Base for the numbers.                                                                       | `1000`                        |
+| `options.suffixes`       | `Object`                             | Suffixes to use after the number.                                                           | `GENERAL_SUFFIXES`            |
+| `options.suffixes.big`   | `Array`                              | Enable adding suffixes for big numbers (`x >= 0`). E.g. `12MB`                              | `true`                        |
+| `options.suffixes.small` | `Array`                              | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `true`                        |
 
 #### Default options
 
@@ -254,9 +254,9 @@ Simply adds a prefix.
 
 Parameters:
 
-| Name     | Type     | Description                                                             | Default |
-| -------- | -------- | ----------------------------------------------------------------------- | ------- |
-| `prefix` | `String` | Prepends a given prefix and returns a string. `Number|String => String` | -       |
+| Name     | Type     | Description                                                              | Default |
+| -------- | -------- | ------------------------------------------------------------------------ | ------- |
+| `prefix` | `String` | Prepends a given prefix and returns a string. `Number\|String => String` | -       |
 
 ```js
 import { prefix } from '@alesmenzel/number-format';
@@ -272,9 +272,9 @@ Simply adds a suffix.
 
 Parameters:
 
-| Name     | Type     | Description                                                            | Default |
-| -------- | -------- | ---------------------------------------------------------------------- | ------- |
-| `suffix` | `String` | Appends a given suffix and returns a string. `Number|String => String` | -       |
+| Name     | Type     | Description                                                             | Default |
+| -------- | -------- | ----------------------------------------------------------------------- | ------- |
+| `suffix` | `String` | Appends a given suffix and returns a string. `Number\|String => String` | -       |
 
 ```js
 import { suffix } from '@alesmenzel/number-format';
@@ -290,9 +290,9 @@ You can also compose formatters into a single one with the `compose` function.
 
 Parameters:
 
-| Name           | Type         | Description                                                                                                                                                                | Default |
-| -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `...functions` | `Function[]` | Array of formatter functions. A formatter function accepts single value (Number or String) and returns a single value (Number or String). `Number|String => Number|String` | -       |
+| Name           | Type         | Description                                                                                                                                                                  | Default |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `...functions` | `Function[]` | Array of formatter functions. A formatter function accepts single value (Number or String) and returns a single value (Number or String). `Number\|String => Number\|String` | -       |
 
 ```js
 import { compose, round, changeSeparators } from '@alesmenzel/number-format';
