@@ -11,20 +11,67 @@ npm install --save @alesmenzel/number-format
 ## Table of Contents
 
 1. [Usage](#usage)
+   1. [Format](#format)
    1. [Round](#round)
-   2. [Humanize](#humanize)
-   3. [Plus](#plus)
-   4. [Percentage](#percentage)
-   5. [Prefix](#prefix)
-   6. [Suffix](#suffix)
-   7. [Separators](#separators)
-   8. [Custom formatter](#custom-formatter)
-2. [Request a feature](#request-a-feature)
-3. [License](#license)
+   1. [Humanize](#humanize)
+   1. [Separators](#separators)
+   1. [Plus](#plus)
+   1. [Percentage](#percentage)
+   1. [Prefix](#prefix)
+   1. [Suffix](#suffix)
+   1. [Custom formatter](#custom-formatter)
+1. [Request a feature](#request-a-feature)
+1. [License](#license)
 
 ## Usage
 
-Please check the [tests](./src) or function [documentation](./src) to see usage.
+### Format
+
+Formatter unifies all of the formating functions into a single interface. Formatter accepts configuration object and returns a formatting function.
+
+Parameters:
+
+| Name                         | Type           | Description                                                                                                                                                                                                                         | Default                                    |
+| ---------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `options`                    | `Object`       | The configuration object.                                                                                                                                                                                                           | [See below](#default-configuration-object) |
+| `options.decimalPoint`       | `String`       | Decimal point. (e.g. `123.56`)                                                                                                                                                                                                      | `'.'` (dot)                                |
+| `options.thousandsSeparator` | `String`       | Thousand separators. (e.g. `1 000 000`)                                                                                                                                                                                             | `''` (empty string)                        |
+| `options.round`              | `Number|Falsy` | Precision (e.g. `0.001` for 3 decimal places or `1000` for rounding to thousands, use `1` to round to whole numbers).                                                                                                               | `false`                                    |
+| `options.percentage`         | `Boolean`      | Whether to add `_%` (space percentage) suffix and times the number by `100`. (e.g. `0.124` -> `12.4 %`)                                                                                                                             | `false`                                    |
+| `options.humanize`           | `Object|Falsy` | Whether to transform the number into a human readable format. See [humanize](#humanize) for available options. The only difference is that the `transform()` function runs after adding decimal/thousands separators and plus sign. | `false`                                    |
+| `options.plus`               | `Boolean`      | Whether to append `+` to numbers greater then zero.                                                                                                                                                                                 | `false`                                    |
+| `options.prefix`             | `String`       | Prepends the given prefix.                                                                                                                                                                                                          | `''` (empty string)                        |
+| `options.suffix`             | `String`       | Appends the given suffix.                                                                                                                                                                                                           | `''` (empty string)                        |
+
+#### Default configuration object
+
+```js
+{
+    decimalPoint = '.',
+    thousandsSeparator = '',
+    round = false,
+    percentage = false,
+    humanize = false,
+    plus = false,
+    prefix = '',
+    suffix = '',
+  }
+```
+
+```js
+import formatter, { SI_SUFFIXES } from '@alesmenzel/number-format';
+
+const input = 12345607.55678;
+const format = formatter({
+  round: 0.1,
+  plus: true,
+  humanize: {
+    suffixes: SI_SUFFIXES,
+  },
+});
+
+format(input); // '+12.3MB'
+```
 
 ### Round
 
@@ -153,6 +200,30 @@ const formatBytes = humanize({
 formatBytes(156949847); // 149.68MB
 ```
 
+### Separators
+
+Change decimal and thousands separators.
+
+Parameters:
+
+| Name                 | Type     | Description                      | Default             |
+| -------------------- | -------- | -------------------------------- | ------------------- |
+| `thousandsSeparator` | `String` | Symbol for separating thousands. | `''` (empty string) |
+| `decimalSeparator`   | `String` | Symbol for separating decimals.  | `.` (dot)           |
+
+```js
+import { changeSeparators } from '@alesmenzel/number-format';
+
+const czechFormat = changeSeparators(' ', '.');
+czechFormat(1596849.19); // '1 596 849.19'
+
+const usFormat = changeSeparators(',', '.');
+usFormat(1596849.19); // '1,596,849.19'
+
+const norwegianFormat = changeSeparators('.', ',');
+norwegianFormat(1596849.19); // '1.596.849,19'
+```
+
 ### Percentage
 
 Simply times the value by 100.
@@ -243,30 +314,6 @@ const norwegianFormat = compose(
   changeSeparators('.', ',')
 );
 norwegianFormat(1596849.19); // '1.596.849,2'
-```
-
-### Separators
-
-Change decimal and thousands separators.
-
-Parameters:
-
-| Name                 | Type     | Description                      | Default             |
-| -------------------- | -------- | -------------------------------- | ------------------- |
-| `thousandsSeparator` | `String` | Symbol for separating thousands. | `''` (empty string) |
-| `decimalSeparator`   | `String` | Symbol for separating decimals.  | `.` (dot)           |
-
-```js
-import { changeSeparators } from '@alesmenzel/number-format';
-
-const czechFormat = changeSeparators(' ', '.');
-czechFormat(1596849.19); // '1 596 849.19'
-
-const usFormat = changeSeparators(',', '.');
-usFormat(1596849.19); // '1,596,849.19'
-
-const norwegianFormat = changeSeparators('.', ',');
-norwegianFormat(1596849.19); // '1.596.849,19'
 ```
 
 ### Custom formatter
