@@ -74,5 +74,8 @@
     "dist",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "is-number": "^7.0.0"
+  }
 }
