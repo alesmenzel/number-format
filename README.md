@@ -109,7 +109,7 @@ Parameters:
 | `options.base`           | `Number`                            | Base for the numbers.                                                                       | `1000`                        |
 | `options.suffixes`       | `Object`                            | Suffixes to use after the number.                                                           | `GENERAL_SUFFIXES`            |
 | `options.suffixes.big`   | `Array`                             | Enable adding suffixes for big numbers (`x >= 0`). E.g. `12MB`                              | `true`                        |
-| `options.suffixes.small` | `Array`                             | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `false`                       |
+| `options.suffixes.small` | `Array`                             | Enable adding suffixes for small numbers (`x < 0`). E.g. `12 nanoseconds`                   | `true`                        |
 
 #### Default options
 
