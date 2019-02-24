@@ -38,6 +38,10 @@ const format = (options = {}) => {
       return value;
     });
 
+    if (humanize.transform) {
+      humanizeStack.push(humanize.transform);
+    }
+
     stack.push(
       nf.humanize({
         ...humanize,

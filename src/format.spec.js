@@ -1,5 +1,6 @@
 import formatter from './format';
-import { GENERAL_NAME_SUFFIXES } from './humanize';
+import { GENERAL_NAME_SUFFIXES, SI_SUFFIXES } from './humanize';
+import suffix from './suffix';
 
 describe('format', () => {
   test('default options', () => {
@@ -52,6 +53,33 @@ describe('format', () => {
     });
 
     expect(format(input)).toBe('+12.3million');
+  });
+
+  test('humanize, plus, round', () => {
+    const input = 12345607.55678;
+    const format = formatter({
+      round: 0.1,
+      plus: true,
+      humanize: {
+        suffixes: SI_SUFFIXES,
+      },
+    });
+
+    expect(format(input)).toBe('+12.3MB');
+  });
+
+  test('humanize + transform, plus, round', () => {
+    const input = 12345607.55678;
+    const format = formatter({
+      round: 0.1,
+      plus: true,
+      humanize: {
+        transform: suffix(' '),
+        suffixes: SI_SUFFIXES,
+      },
+    });
+
+    expect(format(input)).toBe('+12.3 MB');
   });
 
   test('percentage option', () => {
