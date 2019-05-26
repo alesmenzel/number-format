@@ -1,7 +1,7 @@
 export { default as changeSeparators } from './change-separators';
 export { default as changeThousandsSeparator } from './change-thousands-separator';
 export { default as compose } from './compose';
-export { default as humanize } from './humanize';
+export * from './humanize';
 export { default as percentage } from './percentage';
 export { default as plus } from './plus';
 export { default as prefix } from './prefix';
@@ -9,3 +9,4 @@ export { default as round } from './round';
 export { default as suffix } from './suffix';
 export { default as Formatter } from './formatter';
 export { default as createFormatter } from './create-formatter';
+export { default as format } from './format';

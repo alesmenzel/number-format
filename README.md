@@ -12,6 +12,7 @@ npm install --save @alesmenzel/number-format
 
 1. [Usage](#usage)
    1. [Format](#format)
+   1. [Formatter (Chainable)](#format)
    1. [Round](#round)
    1. [Humanize](#humanize)
    1. [Separators](#separators)
@@ -69,6 +70,27 @@ const format = formatter({
     suffixes: SI_SUFFIXES,
   },
 });
+
+format(input); // '+12.3MB'
+```
+
+### Formatter (Chainable)
+
+Formatter is just a different interface for format functoin. Instead of passing a single config object, it allows you to configure the formatter by chaining format methods.
+
+```js
+import { createFormatter, SI_SUFFIXES } from '@alesmenzel/number-format';
+
+const input = 12345607.55678;
+const formatter = createFormatter({
+  round: 0.1,
+  plus: true,
+  humanize: {
+    suffixes: SI_SUFFIXES,
+  },
+});
+// Call `fnc()` to get formatting function
+const format = formatter.fnc();
 
 format(input); // '+12.3MB'
 ```
