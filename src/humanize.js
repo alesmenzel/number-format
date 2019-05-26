@@ -108,7 +108,7 @@ const defaultOptions = {
  *
  * humanize({
  *  transform: round(0.01),
- *  base: 1024
+ *  base: 1024,
  *  suffixes: {
  *    big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
  *    small: []
@@ -122,8 +122,8 @@ const defaultOptions = {
  * @param {Function} options.transform [optional] Transform the humanized result before appending a sufix (number => number)
  * @param {Object} options.suffixes [optional] Suffixes to use (defaults to GENERAL_SUFFIXES)
  * @param {Number} options.base [optional] Base to use (defaults to 1000)
- * @param {Boolean} options.big [optional] Use suffixes for big numbers if available (defautls to true)
- * @param {Boolean} options.small [optional] Use suffixes for small numbers if available (defautls to false)
+ * @param {Boolean} options.big [optional] Use suffixes for big numbers if available (defaults to true)
+ * @param {Boolean} options.small [optional] Use suffixes for small numbers if available (defaults to false)
  */
 const humanize = (options = defaultOptions) => {
   const {

@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Unit tests",
       "program": "${workspaceFolder}/node_modules/jest/bin/jest",
-      "args": ["--runInBand", "numeric.spec.js"],
+      "args": ["--runInBand"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }

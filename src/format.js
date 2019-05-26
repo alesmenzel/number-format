@@ -1,4 +1,23 @@
-import nf from '../number-format';
+/* eslint-disable no-shadow */
+import prefix from './prefix';
+import suffix from './suffix';
+import plus from './plus';
+import round from './round';
+import percentage from './percentage';
+import changeSeparators from './change-separators';
+import humanize from './humanize';
+import compose from './compose';
+
+const nf = {
+  prefix,
+  suffix,
+  plus,
+  round,
+  percentage,
+  changeSeparators,
+  humanize,
+  compose,
+};
 
 const plusPrefix = nf.prefix('+');
 

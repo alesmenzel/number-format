@@ -7,3 +7,5 @@ export { default as plus } from './plus';
 export { default as prefix } from './prefix';
 export { default as round } from './round';
 export { default as suffix } from './suffix';
+export { default as Formatter } from './formatter';
+export { default as createFormatter } from './create-formatter';
