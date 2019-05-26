@@ -1,5 +1,7 @@
 import format from './format';
 
+const isNil = val => val === undefined || val === null;
+
 class Formatter {
   constructor(options = {}) {
     this.options = options;
@@ -12,11 +14,26 @@ class Formatter {
    * @returns {Formatter|Boolean} this or current plus option
    */
   plus(plus) {
-    if (!plus) {
+    if (isNil(plus)) {
       return this.options.plus;
     }
 
     this.options.plus = plus;
+    return this;
+  }
+
+  /**
+   * Set whether to suffix numbers with a % or returns current settings if called without a value
+   *
+   * @param {Boolean} percentage Percentage
+   * @returns {Formatter|Boolean} this or current percentage option
+   */
+  percentage(percentage) {
+    if (isNil(percentage)) {
+      return this.options.percentage;
+    }
+
+    this.options.percentage = percentage;
     return this;
   }
 
@@ -27,7 +44,7 @@ class Formatter {
    * @returns {Formatter|Object} this or current humanize config
    */
   humanize(humanize) {
-    if (!humanize) {
+    if (isNil(humanize)) {
       return this.options.humanize;
     }
 
@@ -42,7 +59,7 @@ class Formatter {
    * @returns {Formatter|Number} this or current rounding
    */
   round(round) {
-    if (!round) {
+    if (isNil(round)) {
       return this.options.round;
     }
 
@@ -57,7 +74,7 @@ class Formatter {
    * @returns {Formatter|String} this or current prefix
    */
   prefix(prefix) {
-    if (!prefix) {
+    if (isNil(prefix)) {
       return this.options.prefix;
     }
 
@@ -72,7 +89,7 @@ class Formatter {
    * @returns {Formatter|String} this or current suffix
    */
   suffix(suffix) {
-    if (!suffix) {
+    if (isNil(suffix)) {
       return this.options.suffix;
     }
 
@@ -87,7 +104,7 @@ class Formatter {
    * @returns {Formatter|String} this or current decimal point
    */
   decimalPoint(decimalPoint) {
-    if (!decimalPoint) {
+    if (isNil(decimalPoint)) {
       return this.options.decimalPoint;
     }
 
@@ -102,7 +119,7 @@ class Formatter {
    * @returns {Formatter|String} this or current thousands separator
    */
   thousandsSeparator(thousandsSeparator) {
-    if (!thousandsSeparator) {
+    if (isNil(thousandsSeparator)) {
       return this.options.thousandsSeparator;
     }
 
@@ -116,7 +133,7 @@ class Formatter {
    * @param {Object} options Configuration
    */
   config(options) {
-    if (!options) {
+    if (isNil(options)) {
       return this.options;
     }
 

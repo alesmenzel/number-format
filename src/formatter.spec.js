@@ -2,10 +2,16 @@ import Formatter from './formatter';
 import round from './round';
 
 describe('plus', () => {
-  test('set/get', () => {
+  test('set/get to true', () => {
     const formatter = new Formatter();
     formatter.plus(true);
     expect(formatter.plus()).toBe(true);
+  });
+
+  test('set/get to false', () => {
+    const formatter = new Formatter();
+    formatter.plus(false);
+    expect(formatter.plus()).toBe(false);
   });
 
   test('on positive number', () => {
@@ -19,9 +25,39 @@ describe('plus', () => {
   test('on negative number', () => {
     const number = -12345678.5678;
     const formatter = new Formatter();
-    const format = formatter.plus('$ ').fnc();
+    const format = formatter.plus(true).fnc();
     const formatted = format(number);
     expect(formatted).toBe('-12345678.5678');
+  });
+});
+
+describe('percentage', () => {
+  test('set/get to true', () => {
+    const formatter = new Formatter();
+    formatter.percentage(true);
+    expect(formatter.percentage()).toBe(true);
+  });
+
+  test('set/get to false', () => {
+    const formatter = new Formatter();
+    formatter.percentage(false);
+    expect(formatter.percentage()).toBe(false);
+  });
+
+  test('on positive number', () => {
+    const number = 12345678.5678;
+    const formatter = new Formatter();
+    const format = formatter.percentage(true).fnc();
+    const formatted = format(number);
+    expect(formatted).toBe('1234567856.78 %');
+  });
+
+  test('on negative number', () => {
+    const number = -12345678.5678;
+    const formatter = new Formatter();
+    const format = formatter.percentage(true).fnc();
+    const formatted = format(number);
+    expect(formatted).toBe('-1234567856.78 %');
   });
 });
 
