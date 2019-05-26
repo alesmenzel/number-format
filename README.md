@@ -12,7 +12,7 @@ npm install --save @alesmenzel/number-format
 
 1. [Usage](#usage)
    1. [Format](#format)
-   1. [Formatter (Chainable)](#format)
+   1. [Create Formatter (chainable)](#Create-Formatter)
    1. [Round](#round)
    1. [Humanize](#humanize)
    1. [Separators](#separators)
@@ -74,7 +74,7 @@ const format = formatter({
 format(input); // '+12.3MB'
 ```
 
-### Formatter (Chainable)
+### Create Formatter
 
 Formatter is just a different interface for format functoin. Instead of passing a single config object, it allows you to configure the formatter by chaining format methods.
 
@@ -202,21 +202,21 @@ format(-123456789); // -123.456789M
 format(100); // 100
 
 const formatAndRound = humanize({
-  transform: round(0.01)
+  transform: round(0.01),
 });
 
-formatAndRound(123456789); // 123.45M
+formatAndRound(123456789); // 123.46M
 
 const formatBytes = humanize({
   transform: round(0.01),
-  base: 1024
+  base: 1024,
   suffixes: {
     // Custom suffixes or you can use any of the predeffined (or combine them)
     big: ['', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-    small: []
+    small: [],
   },
   big: true,
-  small: false
+  small: false,
 });
 
 formatBytes(156949847); // 149.68MB
@@ -253,9 +253,9 @@ Simply times the value by 100.
 ```js
 import { percentage } from '@alesmenzel/number-format';
 
-percentage(0.12); // 12
-percentage(0); // 0
-percentage(-1.23); // -123
+percentage()(0.12); // 12
+percentage()(0); // 0
+percentage()(-1.23); // -123
 ```
 
 ### Plus
@@ -265,9 +265,9 @@ Simply adds a plus for positive numbers.
 ```js
 import { plus } from '@alesmenzel/number-format';
 
-plus(123456); // +123456
-plus(0); // 0
-plus(-123456); // -123456
+plus()(123456); // +123456
+plus()(0); // 0
+plus()(-123456); // -123456
 ```
 
 ### Prefix
@@ -350,7 +350,7 @@ const lastDigits = options => {
   const { length } = options;
 
   return number => {
-    return `${number}`.slice(-options.length);
+    return `${number}`.slice(-length);
   };
 };
 
