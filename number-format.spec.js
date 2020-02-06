@@ -16,28 +16,19 @@ import {
 describe('number-format', () => {
   test('czech format', () => {
     const input = 1596849.19;
-    const czechFormat = compose(
-      round(0.1),
-      changeSeparators(' ', '.')
-    );
+    const czechFormat = compose(round(0.1), changeSeparators(' ', '.'));
     expect(czechFormat(input)).toBe('1 596 849.2');
   });
 
   test('us format', () => {
     const input = 1596849.19;
-    const usFormat = compose(
-      round(0.1),
-      changeSeparators(',', '.')
-    );
+    const usFormat = compose(round(0.1), changeSeparators(',', '.'));
     expect(usFormat(input)).toBe('1,596,849.2');
   });
 
   test('norwegian format', () => {
     const input = 1596849.19;
-    const norwegianFormat = compose(
-      round(0.1),
-      changeSeparators('.', ',')
-    );
+    const norwegianFormat = compose(round(0.1), changeSeparators('.', ','));
     expect(norwegianFormat(input)).toBe('1.596.849,2');
   });
 });
@@ -216,10 +207,7 @@ describe('readme', () => {
       const { length } = options;
       return number => `${number}`.slice(-length);
     };
-    const format = compose(
-      round(10),
-      lastDigits({ length: 3 })
-    );
+    const format = compose(round(10), lastDigits({ length: 3 }));
     const formatted = format(123456789);
     expect(formatted).toBe('790');
   });

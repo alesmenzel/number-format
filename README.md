@@ -319,22 +319,13 @@ Parameters:
 ```js
 import { compose, round, changeSeparators } from '@alesmenzel/number-format';
 
-const czechFormat = compose(
-  round(0.1),
-  changeSeparators(' ', '.')
-);
+const czechFormat = compose(round(0.1), changeSeparators(' ', '.'));
 czechFormat(1596849.19); // '1 596 849.2'
 
-const usFormat = compose(
-  round(0.1),
-  changeSeparators(',', '.')
-);
+const usFormat = compose(round(0.1), changeSeparators(',', '.'));
 usFormat(1596849.19); // '1,596,849.2'
 
-const norwegianFormat = compose(
-  round(0.1),
-  changeSeparators('.', ',')
-);
+const norwegianFormat = compose(round(0.1), changeSeparators('.', ','));
 norwegianFormat(1596849.19); // '1.596.849,2'
 ```
 
@@ -359,10 +350,7 @@ const format = lastDigits({ length: 3 });
 format(123456789); // 789
 
 // Use it in composition
-const format = compose(
-  round(10),
-  lastDigits({ length: 3 })
-);
+const format = compose(round(10), lastDigits({ length: 3 }));
 
 format(123456789); // 790
 ```
