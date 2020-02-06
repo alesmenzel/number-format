@@ -12,6 +12,7 @@
  * @param {String} thousandSep Thousands separator
  */
 const changeThousandsSeparator = (thousandSep = '') => number => {
+  if (!thousandSep) return `${number}`;
   const numberString = `${Math.abs(number)}`;
   const [int, dec] = numberString.split('.');
   const decSufix = dec ? `.${dec}` : '';
