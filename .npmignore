@@ -1,2 +1,24 @@
 # Tests
 /**/*.spec.js
+coverage/
+
+# VSCode
+.vscode/
+# Github
+.github/
+# dotfiles
+.eslintrc
+.eslintignore
+.babelrc
+.prettierrc
+.travis.yml
+
+# Docs
+CODE_OF_CONDUCT.md
+
+# Webpack
+webpack.config.js
+
+# npm pack
+package
+*.tgz
