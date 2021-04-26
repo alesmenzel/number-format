@@ -32,9 +32,6 @@
     "publish:latest": "npm publish --access public --tag latest",
     "publish:next": "npm publish --access public --tag next"
   },
-  "dependencies": {
-    "is-number": "^7.0.0"
-  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
