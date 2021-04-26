@@ -60,7 +60,7 @@ Parameters:
 ```
 
 ```js
-import formatter, { SI_SUFFIXES } from '@alesmenzel/number-format';
+import { format: formatter, SI_SUFFIXES } from '@alesmenzel/number-format';
 
 const input = 12345607.55678;
 const format = formatter({
@@ -70,7 +70,6 @@ const format = formatter({
     suffixes: SI_SUFFIXES,
   },
 });
-
 format(input); // '+12.3MB'
 ```
 
